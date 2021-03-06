@@ -48,3 +48,15 @@ def get_book_data(book_urls) -> dict:
     return book_dict
     
 data = pd.DataFrame(get_book_data(book_urls))
+
+# Transform character-typed rating to integer-based
+data['rating'] = data.rating.map({
+    'One': 1,
+    'Two': 2,
+    'Three': 3,
+    'Four': 4,
+    'Five': 5,
+})
+
+# Export to csv file
+data.to_csv('book_data.csv', index_label='index')
